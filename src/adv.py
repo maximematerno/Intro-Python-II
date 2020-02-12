@@ -1,4 +1,7 @@
+import textwrap
 from room import Room
+from player import Player
+from item import Item
 
 # Declare all the rooms
 
@@ -38,6 +41,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player1 = Player(input('Please Enter your Name: '), room['outside'])
 
 # Write a loop that:
 #
@@ -49,3 +53,30 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+# print(player1.name)
+# print(player1.current_room)
+
+directions = ['n', 's', 'e', 'w']
+
+# Create Basic REPL loop
+while True:
+    cmd = input('Enter Direction~~>').lower()
+    if cmd in directions:
+        player1.travel(cmd)
+    elif cmd == 'q':
+        print('Goodbye!')
+        break
+    else:
+        print('I did not recognize that command')
+
+
+''' Items '''
+
+def found_item(name, current_room):
+    for i in current_room.contents:
+        if i.name == name:
+            return i
+
+    
+    return
